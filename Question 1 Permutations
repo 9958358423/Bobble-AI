@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define pb push_back
+string ans;
+void fun(vector<vector<string> >arr,int n,int i,string str){
+  if(i==n){
+    ans+=str+", ";
+    return;
+  }
+  for(auto j:arr[i]){
+    str+=j;
+    fun(arr,n,i+1,str);
+    int l=str.length();
+    str=str.substr(0,l-1);
+  }
+  return;
+}
+int main(){
+  string file;
+  cin>>file;
+  ifstream fin;
+  fin.open(file);
+  vector<vector<string> > v;
+    string line, word;
+    while (getline(fin,line))
+    {
+        stringstream ss(line);
+        vector<string>row;
+        while(getline(ss, word,','))
+        {
+            row.push_back(word);
+        }
+        v.push_back(row);
+    }
+fun(v,v.size(),0,"");
+ans.erase(ans.begin()+ans.size()-1);
+ans.erase(ans.begin()+ans.size()-1);
+cout<<ans;
+}
